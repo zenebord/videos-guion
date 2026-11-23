@@ -414,7 +414,7 @@ async function abrirProyecto(id){
   P=Object.assign(nuevoProyecto(d.nombre||d.titulo||'Sin nombre',d.cancionId),d,{id});
   if(!P.nombre) P.nombre=d.titulo||'Sin nombre';
   sortM(); dur=c.duracion||0;
-  document.title=P.nombre+' · guion';
+  document.title=P.nombre;
   $('nombreProyecto').value=P.nombre; $('idea').value=P.idea||''; $('tagCancion').textContent='♪ '+c.nombre; $('tTot').textContent=fmt(dur);
   $('carga').hidden=false; $('carga').textContent='Cargando audio…';
   renderTodo(); resize(); $('estado').textContent='listo';
@@ -728,7 +728,7 @@ async function guardarYa(){
   }catch(err){ if(P===p){ $('estado').classList.add('err'); $('estado').textContent='ERROR al guardar: '+err.message; } }
 }
 addEventListener('pagehide',()=>{ if(P&&hTimer){ clearTimeout(hTimer); guardarYa(); } });
-$('nombreProyecto').addEventListener('input',e=>{ P.nombre=e.target.value; document.title=(P.nombre||'Proyecto')+' · guion'; guardar(); });
+$('nombreProyecto').addEventListener('input',e=>{ P.nombre=e.target.value; document.title=P.nombre||'Proyecto'; guardar(); });
 $('idea').addEventListener('input',e=>{ P.idea=e.target.value; guardar(); });
 
 /* ---------- controles y bucle ---------- */
