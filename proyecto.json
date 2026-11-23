@@ -1,0 +1,42 @@
+{
+  "titulo": "Destello",
+  "idea": "",
+  "marcadores": [
+    {
+      "id": "m0",
+      "t": 0,
+      "tipo": "inicio",
+      "etiqueta": "Inicio",
+      "nota": ""
+    },
+    {
+      "id": "conk15e",
+      "t": 14.62,
+      "tipo": "momento",
+      "etiqueta": "",
+      "nota": ""
+    },
+    {
+      "id": "00orivn",
+      "t": 29.45,
+      "tipo": "momento",
+      "etiqueta": "in crescendo",
+      "nota": ""
+    },
+    {
+      "id": "059jupj",
+      "t": 47.32,
+      "tipo": "momento",
+      "etiqueta": "Explosión",
+      "nota": ""
+    },
+    {
+      "id": "eq0862a",
+      "t": 65.33,
+      "tipo": "momento",
+      "etiqueta": "",
+      "nota": ""
+    }
+  ],
+  "escenas": []
+}
