@@ -1,6 +1,12 @@
 # videos-guion
 
-Editor para armar el guion de un video musical sobre el tema **Destello**: se marcan las etapas de la canción y se escribe una escena por etapa, en función del tiempo disponible.
+Editor para armar guiones de videos musicales. Se marcan las etapas de una canción (verso, estribillo…) y se escribe una escena por etapa, en función del tiempo que dura cada una.
 
-- **Local** (guarda en `proyecto.json` y genera `guion.md`): `python3 servidor.py`
-- **Remoto** (GitHub Pages): el editor guarda en el navegador; con *Exportar JSON* se baja `proyecto.json` para subirlo al repo.
+- **Pistas subidas:** biblioteca de canciones (`biblioteca/`).
+- **Proyectos:** cada proyecto es un guion sobre una canción (`proyectos/<id>.json` y su `.md`). De una misma pista se pueden hacer varios guiones.
+
+## Uso
+
+- **Local** (guarda en disco, permite cargar canciones): `python3 servidor.py`
+- **Publicar** en GitHub Pages: `./publicar.sh`
+- **Remoto** (https://zenebord.github.io/videos-guion/): muestra lo publicado; las ediciones se guardan en el navegador (*Exportar JSON* para llevarlas al repo). No permite cargar canciones nuevas.

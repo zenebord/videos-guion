@@ -1,5 +1,4 @@
 {
-  "titulo": "Destello",
   "idea": "",
   "marcadores": [
     {
@@ -38,5 +37,10 @@
       "nota": ""
     }
   ],
-  "escenas": []
+  "escenas": [],
+  "id": "guion1",
+  "nombre": "Destello · primer guion",
+  "cancionId": "destello",
+  "creado": 1795401709192,
+  "modificado": 1795401709192
 }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Destello · guion</title>
+<title>Videos · guion</title>
 <style>
 :root{
   --bg:#0e1116; --panel:#171b22; --panel2:#1e242d; --line:#2a313c; --txt:#e6e9ee; --mut:#8b95a5;
@@ -11,42 +11,65 @@
   --r:10px;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 button,input,select,textarea{font:inherit;color:inherit}
 input,select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:6px 8px;width:100%}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:-1px;border-color:transparent}
+input:disabled{opacity:.7}
 textarea{resize:vertical;min-height:58px}
-button{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:6px 10px;cursor:pointer;white-space:nowrap}
-button:hover{border-color:var(--mut)}
+button,.btn{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:6px 10px;cursor:pointer;white-space:nowrap;color:var(--txt);text-decoration:none;display:inline-block;font-size:14px}
+button:hover,.btn:hover{border-color:var(--mut)}
+button:disabled{opacity:.4;cursor:not-allowed}
 button.pri{background:var(--acc);color:#1a1200;border-color:var(--acc);font-weight:600}
-button.pri:hover{background:var(--acc2)}
+button.pri:hover:not(:disabled){background:var(--acc2)}
 button.ico{padding:6px 8px;min-width:32px}
 .wrap{max-width:1500px;margin:0 auto;padding:12px 16px 40px}
 header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 header h1{margin:0;font-size:20px;letter-spacing:.3px}
-header h1 input{font-size:20px;font-weight:700;background:transparent;border:1px solid transparent;width:260px;padding:2px 6px}
+header h1 input{font-size:20px;font-weight:700;background:transparent;border:1px solid transparent;width:300px;padding:2px 6px}
 header h1 input:hover{border-color:var(--line)}
+.tag{color:var(--mut);font-size:12px;border:1px solid var(--line);border-radius:99px;padding:2px 10px}
 #estado{margin-left:auto;color:var(--mut);font-size:12px}
 #estado.err{color:var(--bad)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
+.card>h2{margin:0;padding:10px 12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--line)}
+.card>h2 .sp,.sp{flex:1}
+.card>h2 button{text-transform:none;letter-spacing:0;font-size:12px;padding:4px 8px}
+.body{padding:10px 12px}
+.vacio{color:var(--mut);padding:18px;text-align:center}
+.hint{color:var(--mut);font-size:12px;margin:6px 2px 12px}
+kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;font-size:11px}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--acc);color:#1a1200;padding:6px 14px;border-radius:99px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+#toast.on{opacity:1}
+
+/* ---------- home ---------- */
+.home{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+@media (max-width:900px){.home{grid-template-columns:1fr}}
+.home .item{display:flex;gap:10px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:var(--bg)}
+.home .item .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;color:inherit;text-decoration:none}
+.home .item .info small{color:var(--mut);font-size:12px}
+.home a.info:hover strong{color:var(--acc)}
+.home .item input{background:transparent;border-color:transparent;font-weight:600;padding:2px 6px}
+.home .item input:hover:not(:disabled){border-color:var(--line)}
+#cardProyectos{order:1}
+#cardCanciones{order:2}
+@media (max-width:900px){#cardProyectos{order:1}#cardCanciones{order:2}}
+.nuevo{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:14px}
+@media (max-width:600px){.nuevo{grid-template-columns:1fr}}
+.drop{outline:2px dashed var(--acc);outline-offset:-6px}
+
+/* ---------- editor ---------- */
 .transport{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;margin-bottom:8px}
 .transport .time{font:600 22px/1 ui-monospace,Menlo,monospace;min-width:120px}
 .transport .time small{color:var(--mut);font-size:13px;font-weight:400}
-.transport .sp{flex:1}
 .transport select{width:auto}
 .transport label{color:var(--mut);font-size:12px}
 .wave{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;height:190px;touch-action:none}
 .wave canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.wave .carga{position:absolute;inset:0;display:grid;place-items:center;color:var(--mut)}
-.hint{color:var(--mut);font-size:12px;margin:6px 2px 12px}
-kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;font-size:11px}
+.wave .carga{position:absolute;inset:0;display:grid;place-items:center;color:var(--mut);background:var(--panel)}
 .cols{display:grid;grid-template-columns:minmax(340px,430px) 1fr;gap:14px;align-items:start}
 @media (max-width:900px){.cols{grid-template-columns:1fr}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
-.card>h2{margin:0;padding:10px 12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--line)}
-.card>h2 .sp{flex:1}
-.card>h2 button{text-transform:none;letter-spacing:0;font-size:12px;padding:4px 8px}
-.body{padding:10px 12px}
-/* marcadores */
 .mrow{display:grid;grid-template-columns:14px 78px 1fr auto;gap:6px 8px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:var(--bg)}
 .mrow.on{border-color:var(--acc)}
 .mrow .dot{width:12px;height:12px;border-radius:50%}
@@ -56,7 +79,6 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:2p
 .mrow .acts button{padding:3px 7px;font-size:12px}
 .mrow textarea{min-height:36px}
 .etapa-dur{color:var(--mut);font-size:12px;font-family:ui-monospace,Menlo,monospace}
-/* escenas */
 .escena{border:1px solid var(--line);border-radius:var(--r);background:var(--bg);margin-bottom:12px;overflow:hidden;border-left-width:5px}
 .escena.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc) inset}
 .eh{display:flex;gap:10px;align-items:center;padding:8px 10px;background:var(--panel2);flex-wrap:wrap}
@@ -71,22 +93,54 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:2p
 .eb .tomas input{width:70px}
 .eb .ritmo{color:var(--acc2);font:13px ui-monospace,Menlo,monospace}
 .eb .pie{display:flex;gap:6px;justify-content:flex-end}
-.vacio{color:var(--mut);padding:18px;text-align:center}
 .resumen{display:flex;gap:2px;height:22px;border-radius:6px;overflow:hidden;margin-bottom:10px}
 .resumen div{display:grid;place-items:center;font-size:10px;color:#10141a;overflow:hidden;white-space:nowrap;cursor:pointer}
-#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--acc);color:#1a1200;padding:6px 14px;border-radius:99px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none}
-#toast.on{opacity:1}
 </style>
 </head>
 <body>
 <div class="wrap">
+
+<!-- ================= HOME ================= -->
+<section id="vistaHome" hidden>
   <header>
-    <h1><input id="titulo" value="Destello" aria-label="Título del tema"></h1>
-    <span id="estado">cargando…</span>
+    <h1>Videos · guion</h1>
+    <span class="tag" id="modoTag"></span>
+  </header>
+  <div class="home">
+    <section class="card" id="cardCanciones">
+      <h2>Pistas subidas <span class="sp"></span><button id="btnSubir" class="pri">＋ Cargar canción</button></h2>
+      <input type="file" id="fileAudio" accept="audio/*,.mp3,.m4a,.wav,.ogg,.opus,.flac,.mpeg" hidden>
+      <div class="body">
+        <div id="listaC"></div>
+        <div class="hint" id="hintSubir">Arrastrá un archivo de audio sobre este cuadro para cargarlo.</div>
+      </div>
+    </section>
+
+    <section class="card" id="cardProyectos">
+      <h2>Proyectos (guiones)</h2>
+      <div class="body">
+        <form id="formNuevo" class="nuevo">
+          <input id="npNombre" placeholder="Nombre del proyecto (ej. Versión animada)" autocomplete="off">
+          <select id="npCancion" aria-label="Canción"></select>
+          <button class="pri" type="submit" id="btnCrear">Crear proyecto</button>
+        </form>
+        <div id="listaP"></div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ================= EDITOR ================= -->
+<section id="vistaEditor" hidden>
+  <header>
+    <a class="btn" href="#/">← Proyectos</a>
+    <h1><input id="nombreProyecto" aria-label="Nombre del proyecto"></h1>
+    <span class="tag" id="tagCancion"></span>
+    <span id="estado"></span>
     <button id="btnCopiar">Copiar guion</button>
     <button id="btnDescargar">Descargar .md</button>
-    <button id="btnExpJson" title="Baja proyecto.json para subirlo al repo">Exportar JSON</button>
-    <button id="btnImpJson" title="Carga un proyecto.json">Importar JSON</button>
+    <button id="btnExpJson" title="Baja el proyecto como JSON">Exportar JSON</button>
+    <button id="btnImpJson" title="Reemplaza este proyecto por un JSON">Importar JSON</button>
     <input type="file" id="fileJson" accept=".json,application/json" hidden>
   </header>
 
@@ -120,11 +174,13 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:2p
       <div class="body">
         <label style="color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.06em">Idea general del video</label>
         <textarea id="idea" placeholder="Concepto, tono, protagonista, locaciones, referencias…" style="margin:3px 0 12px"></textarea>
-        <div class="resumen" id="resumen" title="Duración de cada escena, proporcional"></div>
+        <div class="resumen" id="resumen"></div>
         <div id="listaE"></div>
       </div>
     </section>
   </div>
+</section>
+
 </div>
 <div id="toast"></div>
 
@@ -146,17 +202,8 @@ const ETAPAS = [
 const ET = Object.fromEntries(ETAPAS.map(e=>[e.k,e]));
 const $ = id => document.getElementById(id);
 const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const uid = () => Math.random().toString(36).slice(2,9);
-
-/* ---------- estado ---------- */
-let P = nuevoProyecto();
-let dur = 0, peaks = null, peakMax = 1;
-function nuevoProyecto(){
-  return {titulo:'Destello', idea:'', marcadores:[{id:'m0',t:0,tipo:'inicio',etiqueta:'Inicio',nota:''}], escenas:[]};
-}
-const mk = id => P.marcadores.find(m=>m.id===id);
-const sortM = () => P.marcadores.sort((a,b)=>a.t-b.t);
-
+const uid = () => Math.random().toString(36).slice(2,9).padEnd(5,'0');
+const valido = d => d&&Array.isArray(d.marcadores)&&d.marcadores.length;
 function fmt(t, dec=1){
   if(!isFinite(t)) t=0; t=Math.max(0,t);
   const m=Math.floor(t/60), s=t-m*60;
@@ -167,6 +214,184 @@ function parseT(str){
   const p=str.split(':').map(Number); if(p.some(isNaN)) return NaN;
   return p.length===1?p[0]:p.length===2?p[0]*60+p[1]:p[0]*3600+p[1]*60+p[2];
 }
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('on'),1800); }
+const MIME = {mp3:'audio/mpeg',mpeg:'audio/mpeg',mpga:'audio/mpeg',m4a:'audio/mp4',mp4:'audio/mp4',aac:'audio/aac',wav:'audio/wav',ogg:'audio/ogg',oga:'audio/ogg',opus:'audio/ogg',flac:'audio/flac',webm:'audio/webm'};
+
+/* =====================================================================
+   ALMACÉN: servidor local (lee/escribe en disco) o estático (GitHub Pages:
+   lee lo publicado y guarda las ediciones en este navegador)
+   ===================================================================== */
+const resumenDe = p => ({id:p.id,nombre:p.nombre,cancionId:p.cancionId,etapas:p.marcadores.length,escenas:p.escenas.length,creado:p.creado||0,modificado:p.modificado||0});
+const Store = {
+  modo:'estatico',
+  async detectar(){
+    try{ const r=await fetch('api/canciones',{cache:'no-store'}); if(r.ok){ this.modo='servidor'; return; } }catch{}
+    this.modo='estatico';
+  },
+  async json(url){ try{ const r=await fetch(url,{cache:'no-store'}); return r.ok?await r.json():null; }catch{ return null; } },
+  locales(){ try{ return JSON.parse(localStorage.getItem('vg-proyectos'))||{}; }catch{ return {}; } },
+  async canciones(){ return (await this.json(this.modo==='servidor'?'api/canciones':'biblioteca/canciones.json'))||[]; },
+  async proyectos(){
+    if(this.modo==='servidor') return (await this.json('api/proyectos'))||[];
+    const map=new Map(((await this.json('proyectos/index.json'))||[]).map(x=>[x.id,x]));
+    for(const p of Object.values(this.locales())){ const b=map.get(p.id); if(!b||(p.modificado||0)>=(b.modificado||0)) map.set(p.id,resumenDe(p)); }
+    return [...map.values()];
+  },
+  async leer(id){
+    if(this.modo==='servidor') return this.json('api/proyectos/'+id);
+    const loc=this.locales()[id], est=await this.json('proyectos/'+id+'.json');
+    return loc&&(!est||(loc.modificado||0)>=(est.modificado||0))?loc:est;
+  },
+  async guardar(p,md){
+    if(this.modo==='servidor'){
+      const r=await fetch('api/proyectos/'+p.id,{method:'PUT',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({proyecto:p,markdown:md})});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return;
+    }
+    const l=this.locales(); l[p.id]=p; localStorage.setItem('vg-proyectos',JSON.stringify(l));
+  },
+  async borrar(id){
+    if(this.modo==='servidor'){ const r=await fetch('api/proyectos/'+id,{method:'DELETE'}); if(!r.ok) throw new Error('HTTP '+r.status); return; }
+    if(((await this.json('proyectos/index.json'))||[]).some(x=>x.id===id)) throw new Error('Este proyecto está publicado en el repo: borralo desde el servidor local y publicá de nuevo.');
+    const l=this.locales(); delete l[id]; localStorage.setItem('vg-proyectos',JSON.stringify(l));
+  },
+  async subir(file,dur){
+    const r=await fetch('api/canciones?nombre='+encodeURIComponent(file.name)+'&duracion='+dur,{method:'POST',headers:{'Content-Type':file.type||'application/octet-stream'},body:file});
+    const j=await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||('HTTP '+r.status)); return j;
+  },
+  async renombrarCancion(id,nombre){
+    const r=await fetch('api/canciones/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({nombre})});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+  },
+  async borrarCancion(id){
+    const r=await fetch('api/canciones/'+id,{method:'DELETE'}); const j=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(j.proyectos?('La usan: '+j.proyectos.join(', ')):(j.error||r.status));
+  },
+};
+
+/* =====================================================================
+   ROUTER
+   ===================================================================== */
+const S = {canciones:[], proyectos:[]};
+function vista(v){ $('vistaHome').hidden=v!=='home'; $('vistaEditor').hidden=v!=='editor'; document.title=v==='home'?'Videos · guion':document.title; }
+async function route(){
+  const m=location.hash.match(/^#\/p\/([a-z0-9]+)$/);
+  prev.pause(); prevId=null;
+  if(m) await abrirProyecto(m[1]); else await mostrarHome();
+}
+addEventListener('hashchange',route);
+
+/* =====================================================================
+   HOME: biblioteca y proyectos
+   ===================================================================== */
+const prev=new Audio(); let prevId=null;
+prev.addEventListener('ended',()=>{ prevId=null; renderCanciones(); });
+const fechaTxt = ms => ms? new Date(ms).toLocaleString('es',{dateStyle:'medium',timeStyle:'short'}) : '';
+
+async function mostrarHome(){
+  await cerrarEditor(); vista('home');
+  $('modoTag').textContent = Store.modo==='servidor' ? 'Servidor local' : 'Remoto · las canciones nuevas se cargan desde el servidor local';
+  await refrescarHome();
+}
+async function refrescarHome(){
+  [S.canciones,S.proyectos]=await Promise.all([Store.canciones(),Store.proyectos()]);
+  renderCanciones(); renderProyectos();
+}
+function renderCanciones(){
+  const srv=Store.modo==='servidor';
+  $('btnSubir').disabled=!srv; $('btnSubir').title=srv?'':'Sólo disponible con el servidor local (python3 servidor.py)';
+  $('hintSubir').hidden=!srv;
+  $('listaC').innerHTML = S.canciones.length ? S.canciones.map(c=>{
+    const usos=S.proyectos.filter(p=>p.cancionId===c.id).length;
+    return `<div class="item" data-id="${c.id}">
+      <button class="ico" data-act="prev" title="Escuchar">${prevId===c.id?'❚❚':'▶'}</button>
+      <div class="info"><input data-f="nombre" value="${esc(c.nombre)}" ${srv?'':'disabled'} aria-label="Nombre de la canción">
+        <small>${fmt(c.duracion)}${c.bytes?' · '+(c.bytes/1048576).toFixed(1)+' MB':''} · ${usos} proyecto${usos===1?'':'s'}</small></div>
+      <button data-act="borrar" ${(usos||!srv)?'disabled':''} title="${usos?'Está en uso por '+usos+' proyecto(s)':srv?'Borrar canción':'Sólo desde el servidor local'}">✕</button>
+    </div>`;
+  }).join('') : '<div class="vacio">Todavía no hay canciones. Cargá la primera con “＋ Cargar canción”.</div>';
+  const sel=$('npCancion'), previo=sel.value;
+  sel.innerHTML = S.canciones.length ? S.canciones.map(c=>`<option value="${c.id}">${esc(c.nombre)} (${fmt(c.duracion,0)})</option>`).join('') : '<option value="">— cargá una canción primero —</option>';
+  if(S.canciones.some(c=>c.id===previo)) sel.value=previo;
+  sel.disabled=$('btnCrear').disabled=!S.canciones.length;
+}
+function renderProyectos(){
+  const ord=[...S.proyectos].sort((a,b)=>(b.modificado||0)-(a.modificado||0));
+  $('listaP').innerHTML = ord.length ? ord.map(p=>{
+    const c=S.canciones.find(x=>x.id===p.cancionId);
+    return `<div class="item" data-id="${p.id}">
+      <a class="info" href="#/p/${p.id}"><strong>${esc(p.nombre||'Sin nombre')}</strong>
+        <small>♪ ${c?esc(c.nombre):'(canción no encontrada)'} · ${p.etapas} etapa${p.etapas===1?'':'s'} · ${p.escenas} escena${p.escenas===1?'':'s'}${p.modificado?' · '+fechaTxt(p.modificado):''}</small></a>
+      <a class="btn" href="#/p/${p.id}">Abrir</a>
+      <button data-act="borrar" title="Borrar proyecto">✕</button>
+    </div>`;
+  }).join('') : '<div class="vacio">Todavía no hay proyectos. Elegí una canción, ponele un nombre y creá el primero.</div>';
+}
+$('listaC').addEventListener('click',async e=>{
+  const b=e.target.closest('button[data-act]'); if(!b||b.disabled) return;
+  const c=S.canciones.find(x=>x.id===b.closest('.item').dataset.id);
+  if(b.dataset.act==='prev'){
+    if(prevId===c.id){ prev.pause(); prevId=null; } else { prev.src='biblioteca/'+encodeURIComponent(c.archivo); prev.play().catch(()=>toast('No pude reproducir')); prevId=c.id; }
+    renderCanciones();
+  } else if(b.dataset.act==='borrar'){
+    if(!confirm(`¿Borrar la canción "${c.nombre}" y su archivo de audio? No se puede deshacer.`)) return;
+    try{ prev.pause(); prevId=null; await Store.borrarCancion(c.id); await refrescarHome(); toast('Canción borrada'); }catch(err){ toast(err.message); }
+  }
+});
+$('listaC').addEventListener('change',async e=>{
+  if(e.target.dataset.f!=='nombre') return;
+  const c=S.canciones.find(x=>x.id===e.target.closest('.item').dataset.id), nombre=e.target.value.trim();
+  if(!nombre){ e.target.value=c.nombre; return; }
+  try{ await Store.renombrarCancion(c.id,nombre); c.nombre=nombre; renderCanciones(); renderProyectos(); }catch(err){ toast('No pude renombrar: '+err.message); }
+});
+$('listaP').addEventListener('click',async e=>{
+  const b=e.target.closest('button[data-act="borrar"]'); if(!b) return;
+  const p=S.proyectos.find(x=>x.id===b.closest('.item').dataset.id);
+  if(!confirm(`¿Borrar el proyecto "${p.nombre}" con todo su guion? No se puede deshacer.`)) return;
+  try{ await Store.borrar(p.id); await refrescarHome(); toast('Proyecto borrado'); }catch(err){ toast(err.message); }
+});
+$('formNuevo').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const nombre=$('npNombre').value.trim(), cancionId=$('npCancion').value;
+  if(!nombre){ toast('Ponele un nombre al proyecto'); $('npNombre').focus(); return; }
+  if(!cancionId) return toast('Elegí una canción');
+  const p=nuevoProyecto(nombre,cancionId);
+  try{ await Store.guardar(p,''); $('npNombre').value=''; location.hash='#/p/'+p.id; }catch(err){ toast('No pude crear el proyecto: '+err.message); }
+});
+function duracionDe(file){
+  return new Promise(res=>{
+    const a=new Audio(), u=URL.createObjectURL(file); a.preload='metadata';
+    a.onloadedmetadata=()=>{ res(isFinite(a.duration)?a.duration:0); URL.revokeObjectURL(u); };
+    a.onerror=()=>{ res(null); URL.revokeObjectURL(u); };
+    a.src=u;
+  });
+}
+async function subirArchivo(file){
+  if(Store.modo!=='servidor') return toast('Cargar canciones sólo se puede desde el servidor local');
+  const btn=$('btnSubir'); btn.disabled=true; btn.textContent='Subiendo…';
+  try{
+    const dur=await duracionDe(file);
+    if(dur===null) throw new Error('El navegador no pudo leer ese archivo como audio');
+    const c=await Store.subir(file,dur); await refrescarHome(); toast('Canción cargada: '+c.nombre);
+  }catch(err){ toast(err.message); }
+  btn.textContent='＋ Cargar canción'; btn.disabled=Store.modo!=='servidor';
+}
+$('btnSubir').onclick=()=>$('fileAudio').click();
+$('fileAudio').onchange=e=>{ const f=e.target.files[0]; e.target.value=''; if(f) subirArchivo(f); };
+const dz=$('cardCanciones');
+dz.addEventListener('dragover',e=>{ e.preventDefault(); dz.classList.add('drop'); });
+dz.addEventListener('dragleave',()=>dz.classList.remove('drop'));
+dz.addEventListener('drop',e=>{ e.preventDefault(); dz.classList.remove('drop'); const f=e.dataTransfer.files[0]; if(f) subirArchivo(f); });
+
+/* =====================================================================
+   EDITOR
+   ===================================================================== */
+let P=null, cancion=null, dur=0, peaks=null, peakMax=1, urlAudio=null, sesion=0;
+function nuevoProyecto(nombre,cancionId){
+  return {id:uid(), nombre, cancionId, idea:'', marcadores:[{id:'m0',t:0,tipo:'inicio',etiqueta:'Inicio',nota:''}], escenas:[], creado:Date.now(), modificado:Date.now()};
+}
+const mk = id => P.marcadores.find(m=>m.id===id);
+const sortM = () => P.marcadores.sort((a,b)=>a.t-b.t);
 function nextT(t){ for(const m of P.marcadores) if(m.t>t+1e-6) return m.t; return dur; }
 function rango(sc){
   const a=mk(sc.desde), t0=a?a.t:0; let t1=nextT(t0);
@@ -176,25 +401,55 @@ function rango(sc){
 const escenasOrd = () => [...P.escenas].sort((a,b)=>rango(a)[0]-rango(b)[0]);
 const activaIdx = t => { let r=-1; P.marcadores.forEach((m,i)=>{ if(m.t<=t+1e-6) r=i; }); return r; };
 
+/* ---------- apertura / cierre ---------- */
+async function abrirProyecto(id){
+  await cerrarEditor(); const mi=sesion;
+  vista('editor'); $('estado').textContent='cargando…'; $('estado').classList.remove('err');
+  const d=await Store.leer(id); if(mi!==sesion) return;
+  S.canciones=await Store.canciones(); if(mi!==sesion) return;
+  if(!valido(d)){ toast('No encontré ese proyecto'); location.hash='#/'; return; }
+  const c=S.canciones.find(x=>x.id===d.cancionId);
+  if(!c){ toast('La canción de este proyecto ya no está en la biblioteca'); location.hash='#/'; return; }
+  cancion=c;
+  P=Object.assign(nuevoProyecto(d.nombre||d.titulo||'Sin nombre',d.cancionId),d,{id});
+  if(!P.nombre) P.nombre=d.titulo||'Sin nombre';
+  sortM(); dur=c.duracion||0;
+  document.title=P.nombre+' · guion';
+  $('nombreProyecto').value=P.nombre; $('idea').value=P.idea||''; $('tagCancion').textContent='♪ '+c.nombre; $('tTot').textContent=fmt(dur);
+  $('carga').hidden=false; $('carga').textContent='Cargando audio…';
+  renderTodo(); resize(); $('estado').textContent='listo';
+  try{ await cargarAudio('biblioteca/'+encodeURIComponent(c.archivo),c.archivo,mi); }
+  catch(err){ if(mi===sesion){ $('carga').hidden=false; $('carga').textContent='No pude cargar el audio: '+err.message; } }
+}
+async function cerrarEditor(){
+  sesion++; audio.pause(); playUntil=null;
+  if(P&&hTimer){ clearTimeout(hTimer); hTimer=null; await guardarYa(); }
+  P=null; cancion=null; peaks=null; dur=0;
+  if(urlAudio){ URL.revokeObjectURL(urlAudio); urlAudio=null; audio.removeAttribute('src'); audio.load(); }
+}
+
 /* ---------- audio ---------- */
 const audio = new Audio(); audio.preload='auto';
 let playUntil = null;
-async function cargarAudio(){
-  const buf = await (await fetch('destello.mp3')).arrayBuffer();
-  audio.src = URL.createObjectURL(new Blob([buf.slice(0)],{type:'audio/mpeg'}));
-  const ac = new (window.AudioContext||window.webkitAudioContext)();
-  const dec = await ac.decodeAudioData(buf);
-  dur = dec.duration;
-  const B = Math.ceil(dur*100), pk = new Float32Array(B);
-  const chs = [...Array(dec.numberOfChannels).keys()].map(i=>dec.getChannelData(i)), sr=dec.sampleRate, per=sr/100;
+async function cargarAudio(url,archivo,mi){
+  const resp=await fetch(url); if(!resp.ok) throw new Error('HTTP '+resp.status);
+  const buf=await resp.arrayBuffer(); if(mi!==sesion) return;
+  const ext=(archivo.split('.').pop()||'').toLowerCase();
+  urlAudio=URL.createObjectURL(new Blob([buf.slice(0)],{type:MIME[ext]||''}));
+  audio.src=urlAudio;
+  const ac=new (window.AudioContext||window.webkitAudioContext)();
+  const dec=await ac.decodeAudioData(buf); ac.close();
+  if(mi!==sesion) return;
+  dur=dec.duration;
+  const B=Math.ceil(dur*100), pk=new Float32Array(B);
+  const chs=[...Array(dec.numberOfChannels).keys()].map(i=>dec.getChannelData(i)), per=dec.sampleRate/100;
   for(let b=0;b<B;b++){
     const a=Math.floor(b*per), z=Math.min(Math.floor((b+1)*per),dec.length); let mx=0;
     for(const d of chs) for(let i=a;i<z;i++){ const v=Math.abs(d[i]); if(v>mx) mx=v; }
     pk[b]=mx;
   }
   peaks=pk; peakMax=Math.max(...pk)||1;
-  ac.close();
-  $('carga').remove(); $('tTot').textContent=fmt(dur);
+  $('carga').hidden=true; $('tTot').textContent=fmt(dur);
   fitView(); renderTodo();
 }
 function play(){ playUntil=null; audio.play(); }
@@ -229,7 +484,6 @@ function draw(){
   const w=cv.clientWidth, h=cv.clientHeight, now=audio.currentTime;
   ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
   const waveTop=RULER+18, waveBot=h-BAND-4, mid=(waveTop+waveBot)/2, half=(waveBot-waveTop)/2;
-  /* regla */
   ctx.font='11px ui-monospace,Menlo,monospace'; ctx.textBaseline='middle';
   const steps=[.5,1,2,5,10,15,30,60,120]; let step=steps.find(s=>s*V.pps>=70)||120;
   ctx.fillStyle='#8b95a5'; ctx.strokeStyle='#2a313c'; ctx.lineWidth=1;
@@ -237,7 +491,6 @@ function draw(){
     const x=Math.round(xOf(t))+.5; ctx.beginPath(); ctx.moveTo(x,RULER-5); ctx.lineTo(x,h-BAND); ctx.stroke();
     ctx.fillText(fmt(t,step<1?1:0),x+4,RULER/2);
   }
-  /* escenas (banda inferior) */
   for(const sc of escenasOrd()){
     const [a,b]=rango(sc), x0=xOf(a), x1=xOf(b); if(x1<0||x0>w) continue;
     const c=ET[(mk(sc.desde)||{}).tipo]?.c||'#888';
@@ -247,7 +500,6 @@ function draw(){
     ctx.fillStyle='#e6e9ee'; ctx.fillText((sc.titulo||'(sin título)')+'  ·  '+(b-a).toFixed(1)+' s',Math.max(x0,0)+6,h-BAND/2);
     ctx.restore();
   }
-  /* onda */
   if(peaks){
     const px=xOf(now);
     for(let x=0;x<w;x++){
@@ -259,9 +511,7 @@ function draw(){
       ctx.fillRect(x,mid-a,1,a*2);
     }
   }
-  /* marcadores */
-  ctx.textBaseline='middle';
-  P.marcadores.forEach((m,i)=>{
+  P.marcadores.forEach(m=>{
     const x=Math.round(xOf(m.t))+.5; if(x<-80||x>w+10) return;
     const c=ET[m.tipo]?.c||'#fff';
     ctx.strokeStyle=c; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(x,RULER); ctx.lineTo(x,h-BAND); ctx.stroke();
@@ -270,7 +520,6 @@ function draw(){
     ctx.save(); ctx.beginPath(); ctx.rect(x,RULER,tw,16); ctx.clip();
     ctx.fillStyle='#10141a'; ctx.fillText(txt,x+5,RULER+8); ctx.restore();
   });
-  /* cursor */
   const px=Math.round(xOf(now))+.5;
   if(px>=-5&&px<=w+5){
     ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(px,0); ctx.lineTo(px,h); ctx.stroke();
@@ -278,26 +527,27 @@ function draw(){
   }
 }
 
-/* interacción con la onda */
 let drag=null;
-const hitMarker = x => P.marcadores.find(m=>m.id!=='m0' && Math.abs(xOf(m.t)-x)<=6);
+const hitMarker = x => P&&P.marcadores.find(m=>m.id!=='m0' && Math.abs(xOf(m.t)-x)<=6);
 cv.addEventListener('pointerdown',e=>{
+  if(!P) return;
   const x=e.offsetX; cv.setPointerCapture(e.pointerId);
   const m=hitMarker(x);
   drag = m ? {tipo:'m',m} : {tipo:'seek'};
   if(!m) seek(tOf(x));
 });
 cv.addEventListener('pointermove',e=>{
+  if(!P) return;
   const x=e.offsetX;
   if(!drag){ cv.style.cursor = hitMarker(x)?'ew-resize':'pointer'; return; }
   const t=Math.min(Math.max(0.01,tOf(x)),dur);
   if(drag.tipo==='seek') seek(t); else { drag.m.t=Math.round(t*100)/100; dirty=true; }
 });
 cv.addEventListener('pointerup',()=>{
-  if(drag?.tipo==='m'){ sortM(); renderTodo(); guardar(); }
+  if(drag?.tipo==='m'&&P){ sortM(); renderTodo(); guardar(); }
   drag=null;
 });
-cv.addEventListener('dblclick',e=>{ if(!hitMarker(e.offsetX)) addMarker(tOf(e.offsetX)); });
+cv.addEventListener('dblclick',e=>{ if(P&&!hitMarker(e.offsetX)) addMarker(tOf(e.offsetX)); });
 cv.addEventListener('wheel',e=>{
   e.preventDefault();
   if(e.ctrlKey||e.metaKey) zoom(Math.exp(-e.deltaY*0.01),e.offsetX);
@@ -305,7 +555,6 @@ cv.addEventListener('wheel',e=>{
 },{passive:false});
 
 /* ---------- marcadores ---------- */
-function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('on'),1400); }
 function addMarker(t=audio.currentTime){
   t=Math.round(Math.min(Math.max(0,t),dur)*100)/100;
   if(P.marcadores.some(m=>Math.abs(m.t-t)<0.05)) return toast('Ya hay un marcador ahí');
@@ -418,7 +667,7 @@ $('listaE').addEventListener('click',e=>{
   }
 });
 function renderResumen(){
-  const lista=escenasOrd(), tot=lista.reduce((a,s)=>{const [x,y]=rango(s);return a+y-x;},0);
+  const lista=escenasOrd();
   $('resumen').innerHTML = lista.map(s=>{
     const [a,b]=rango(s), c=ET[(mk(s.desde)||{}).tipo]?.c||'#888';
     return `<div data-id="${s.id}" style="flex:${b-a};background:${c}" title="${esc(s.titulo||'(sin título)')} · ${(b-a).toFixed(1)} s">${(b-a)>12?(b-a).toFixed(0)+' s':''}</div>`;
@@ -427,12 +676,12 @@ function renderResumen(){
 }
 $('resumen').addEventListener('click',e=>{ const d=e.target.closest('[data-id]'); if(d) document.querySelector(`.escena[data-id="${d.dataset.id}"]`)?.scrollIntoView({behavior:'smooth',block:'center'}); });
 
-function renderTodo(){ renderMarcadores(); renderEscenas(); renderResumen(); lastAct=null; dirty=true; }
+function renderTodo(){ if(!P) return; renderMarcadores(); renderEscenas(); renderResumen(); lastAct=null; dirty=true; }
 
 /* ---------- guion en markdown ---------- */
 function markdown(){
-  let o=`# ${P.titulo} — guion\n\nDuración del tema: ${fmt(dur)} (${dur.toFixed(1)} s)\n\n`;
-  if(P.idea.trim()) o+=`## Idea general\n\n${P.idea.trim()}\n\n`;
+  let o=`# ${P.nombre} — guion\n\nCanción: ${cancion?cancion.nombre:'?'} · duración ${fmt(dur)} (${dur.toFixed(1)} s)\n\n`;
+  if((P.idea||'').trim()) o+=`## Idea general\n\n${P.idea.trim()}\n\n`;
   o+=`## Etapas del tema\n\n| Desde | Hasta | Duración | Etapa | Nombre |\n|---|---|---|---|---|\n`;
   P.marcadores.forEach((m,i)=>{ const f=i<P.marcadores.length-1?P.marcadores[i+1].t:dur; o+=`| ${fmt(m.t)} | ${fmt(f)} | ${(f-m.t).toFixed(1)} s | ${ET[m.tipo].n} | ${m.etiqueta||''} |\n`; });
   o+=`\n## Escenas\n`;
@@ -448,57 +697,42 @@ function markdown(){
   return o;
 }
 $('btnCopiar').onclick=async()=>{ try{ await navigator.clipboard.writeText(markdown()); toast('Guion copiado'); }catch{ toast('No pude copiar'); } };
-$('btnDescargar').onclick=()=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([markdown()],{type:'text/markdown'})); a.download='guion-'+P.titulo.toLowerCase().replace(/\W+/g,'-')+'.md'; a.click(); };
-
-$('btnExpJson').onclick=()=>{ P.modificado=Date.now(); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(P,null,2)],{type:'application/json'})); a.download='proyecto.json'; a.click(); };
+const bajar=(blob,nombre)=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=nombre; a.click(); };
+const slugN = () => P.nombre.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\W+/g,'-').replace(/^-|-$/g,'')||'guion';
+$('btnDescargar').onclick=()=>bajar(new Blob([markdown()],{type:'text/markdown'}),'guion-'+slugN()+'.md');
+$('btnExpJson').onclick=()=>{ P.modificado=Date.now(); bajar(new Blob([JSON.stringify(P,null,2)],{type:'application/json'}),P.id+'.json'); };
 $('btnImpJson').onclick=()=>$('fileJson').click();
 $('fileJson').onchange=async e=>{
-  const f=e.target.files[0]; if(!f) return;
+  const f=e.target.files[0]; e.target.value=''; if(!f) return;
   try{
     const d=JSON.parse(await f.text()); if(!valido(d)) throw 0;
-    if(!confirm('Esto reemplaza el proyecto actual por el del archivo. ¿Seguir?')) return;
-    P=Object.assign(nuevoProyecto(),d); sortM(); $('titulo').value=P.titulo; $('idea').value=P.idea; renderTodo(); guardar(); toast('Proyecto importado');
+    if(!confirm('Esto reemplaza el contenido de este proyecto por el del archivo. ¿Seguir?')) return;
+    P=Object.assign(nuevoProyecto(P.nombre,P.cancionId),d,{id:P.id,cancionId:P.cancionId}); sortM();
+    $('nombreProyecto').value=P.nombre; $('idea').value=P.idea||''; renderTodo(); guardar(); toast('Proyecto importado');
   }catch{ toast('Ese archivo no es un proyecto válido'); }
-  e.target.value='';
 };
 
 /* ---------- guardado ---------- */
-let hTimer=null, serverOk=true, cargado=false;
+let hTimer=null;
 function guardar(){
-  if(!cargado) return;
+  if(!P) return;
   $('estado').textContent='guardando…'; $('estado').classList.remove('err');
-  clearTimeout(hTimer); hTimer=setTimeout(async()=>{
-    P.modificado=Date.now();
-    try{ localStorage.setItem('destello-proyecto',JSON.stringify(P)); }catch{}
-    try{
-      const r=await fetch('api/proyecto',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({proyecto:P,markdown:markdown()})});
-      if(!r.ok) throw new Error(r.status);
-      $('estado').textContent='guardado en proyecto.json ✓'; serverOk=true;
-    }catch{ serverOk=false; $('estado').textContent='modo remoto: guardado sólo en este navegador (usá Exportar JSON para llevarlo al repo)'; }
-  },500);
+  clearTimeout(hTimer); hTimer=setTimeout(guardarYa,500);
 }
-const valido = d => d&&Array.isArray(d.marcadores)&&d.marcadores.length;
-async function cargarProyecto(){
-  let d=null, srv=null, est=null, loc=null;
-  try{ const r=await fetch('api/proyecto'); if(r.ok) srv=await r.json(); }catch{}
-  if(!valido(srv)){
-    srv=null;
-    try{ const r=await fetch('proyecto.json',{cache:'no-store'}); if(r.ok) est=await r.json(); }catch{}   /* hosting estático (GitHub Pages) */
-  }
-  try{ loc=JSON.parse(localStorage.getItem('destello-proyecto')); }catch{}
-  if(valido(srv)) d=srv;                                   /* con servidor local manda el disco */
-  else if(valido(est)&&valido(loc)) d=(loc.modificado||0)>(est.modificado||0)?loc:est;   /* gana lo más reciente */
-  else d=valido(est)?est:valido(loc)?loc:null;
-  if(valido(d)) P=Object.assign(nuevoProyecto(),d);
-  sortM();
-  $('titulo').value=P.titulo; $('idea').value=P.idea;
-  cargado=true; $('estado').textContent='listo';
+async function guardarYa(){
+  hTimer=null; if(!P) return;
+  const p=P; p.modificado=Date.now(); const md=markdown();
+  try{
+    await Store.guardar(p,md);
+    if(P===p){ $('estado').classList.remove('err'); $('estado').textContent=Store.modo==='servidor'?'guardado ✓':'modo remoto: guardado sólo en este navegador (Exportar JSON para llevarlo al repo)'; }
+  }catch(err){ if(P===p){ $('estado').classList.add('err'); $('estado').textContent='ERROR al guardar: '+err.message; } }
 }
-$('titulo').addEventListener('input',e=>{ P.titulo=e.target.value; guardar(); });
+addEventListener('pagehide',()=>{ if(P&&hTimer){ clearTimeout(hTimer); guardarYa(); } });
+$('nombreProyecto').addEventListener('input',e=>{ P.nombre=e.target.value; document.title=(P.nombre||'Proyecto')+' · guion'; guardar(); });
 $('idea').addEventListener('input',e=>{ P.idea=e.target.value; guardar(); });
 
 /* ---------- controles y bucle ---------- */
-$('btnPlay').onclick=toggle; $('btnM').onclick=()=>addMarker();
+$('btnPlay').onclick=toggle; $('btnM').onclick=()=>P&&addMarker();
 $('zIn').onclick=()=>zoom(1.5); $('zOut').onclick=()=>zoom(1/1.5); $('zFit').onclick=fitView;
 $('vel').onchange=e=>{ audio.playbackRate=+e.target.value; };
 $('btnTramos').onclick=()=>{
@@ -511,7 +745,7 @@ $('btnEscena').onclick=()=>{
   crearEscena(m.id,true);
 };
 addEventListener('keydown',e=>{
-  if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||e.metaKey||e.ctrlKey||e.altKey) return;
+  if(!P||$('vistaEditor').hidden||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||e.metaKey||e.ctrlKey||e.altKey) return;
   if(e.code==='Space'){ e.preventDefault(); toggle(); }
   else if(e.key==='m'||e.key==='M'){ e.preventDefault(); addMarker(); }
   else if(e.key==='ArrowLeft'){ e.preventDefault(); seek(audio.currentTime-(e.shiftKey?5:1)); }
@@ -520,27 +754,32 @@ addEventListener('keydown',e=>{
 
 let lastAct=null, lastT=-1;
 function loop(){
-  const t=audio.currentTime;
-  if(playUntil!=null && t>=playUntil){ audio.pause(); playUntil=null; }
-  if(!audio.paused||dirty||t!==lastT){
-    lastT=t; dirty=false;
-    $('tAct').textContent=fmt(t); $('btnPlay').textContent=audio.paused?'▶ Play':'❚❚ Pausa';
-    if(!audio.paused && !drag){ const x=xOf(t), w=cv.clientWidth; if(x>w*.9||x<0){ V.start=t-w*.1/V.pps; clampView(); } }
-    const ai=activaIdx(t), am=P.marcadores[ai];
-    const key=(am?.id)+'|'+escenasOrd().findIndex(s=>{const [a,b]=rango(s);return t>=a&&t<b;});
-    if(key!==lastAct){
-      lastAct=key;
-      document.querySelectorAll('.mrow').forEach(r=>r.classList.toggle('on',r.dataset.id===am?.id));
-      const ord=escenasOrd();
-      document.querySelectorAll('.escena').forEach(r=>{ const s=ord.find(x=>x.id===r.dataset.id), [a,b]=rango(s); r.classList.toggle('on',t>=a&&t<b); });
+  if(P&&!$('vistaEditor').hidden){
+    const t=audio.currentTime;
+    if(playUntil!=null && t>=playUntil){ audio.pause(); playUntil=null; }
+    if(!audio.paused||dirty||t!==lastT){
+      lastT=t; dirty=false;
+      $('tAct').textContent=fmt(t); $('btnPlay').textContent=audio.paused?'▶ Play':'❚❚ Pausa';
+      if(!audio.paused && !drag){ const x=xOf(t), w=cv.clientWidth; if(x>w*.9||x<0){ V.start=t-w*.1/V.pps; clampView(); } }
+      const ai=activaIdx(t), am=P.marcadores[ai];
+      const key=(am?.id)+'|'+escenasOrd().findIndex(s=>{const [a,b]=rango(s);return t>=a&&t<b;});
+      if(key!==lastAct){
+        lastAct=key;
+        document.querySelectorAll('.mrow').forEach(r=>r.classList.toggle('on',r.dataset.id===am?.id));
+        const ord=escenasOrd();
+        document.querySelectorAll('.escena').forEach(r=>{ const s=ord.find(x=>x.id===r.dataset.id); if(!s) return; const [a,b]=rango(s); r.classList.toggle('on',t>=a&&t<b); });
+      }
+      draw();
     }
-    draw();
   }
   requestAnimationFrame(loop);
 }
+
+/* ---------- arranque ---------- */
 (async()=>{
-  await cargarProyecto(); renderTodo(); resize(); requestAnimationFrame(loop);
-  try{ await cargarAudio(); }catch(err){ $('carga').textContent='No pude cargar destello.mp3: '+err.message; }
+  await Store.detectar();
+  requestAnimationFrame(loop);
+  route();
 })();
 </script>
 </body>
